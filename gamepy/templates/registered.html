@@ -1,0 +1,68 @@
+{% extends 'account.html' %}
+{% block register %}
+
+        <div class="heading"><h2>创建新的用户.</h2></div>
+        <form name="form2" id="ff2" method="post" action="" onsubmit="return checkpassword()">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="用户名 :" name="username" id="username" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="First Name :" name="firstname" id="firstname" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Last Name :" name="lastname" id="lastname" required>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="邮箱地址 :" name="email" id="email" required>
+            </div>
+{#            <div class="form-group">#}
+{#                <input type="tel" class="form-control" placeholder="电话号码 :" name="phone" id="phone" required>#}
+{#            </div>#}
+{#            <div class="form-group">#}
+{#                <input name="gender" id="gender" type="radio"> 男 <input name="gender" id="gender" type="radio"> 女#}
+{#            </div>#}
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="密码 :" name="password" id="password" required>
+            </div>
+            <div class="form-group">
+                <span id="tishi"></span></input>
+                <input type="password" class="form-control" placeholder="确认 密码 :" name="repassword" id="repassword" required>
+            </div>
+            <div class="form-group">
+                <span id="is_agree"></span></input>
+                <input name="agree" id="agree" type="checkbox"><a href="{% url 'xieyi' %}" type="file">同意用户协议</a>
+
+            </div>
+            <input type="submit" class="btn btn-1" value="创建">
+{#            <button  class="btn " >创建</button>#}
+        </form>
+        <script type="text/javascript">
+    	function checkpassword() {
+    		var password = document.getElementById("password").value;
+    		var repassword = document.getElementById("repassword").value;
+
+            var agree = document.getElementById("agree").checked;
+
+            {#if(password != repassword) {#}
+            {#        document.getElementById("tishi").innerHTML="<br><font color='red'>两次输入密码不一致!</font>";#}
+            {#    return false;#}
+            {##}
+            {# }else {#}
+            {#     return true;#}
+            {# }#}
+
+            if (agree){
+                if(password == repassword) {
+                     return true;
+                 }else {
+                     document.getElementById("tishi").innerHTML="<br><font color='red'>两次输入密码不一致!</font>";
+                     return false;
+                 }
+            }
+            else {
+                document.getElementById("is_agree").innerHTML="<br><font color='red'>请同意!</font>";
+                return false;
+            }
+    	}
+        </script>
+{% endblock %}
