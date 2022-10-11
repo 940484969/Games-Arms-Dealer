@@ -1,0 +1,56 @@
+{% extends 'account.html' %}
+{% block register %}
+
+        <div class="heading"><h2>修改.</h2></div>
+        <form name="form2" id="ff2" method="post" action="" onsubmit="return checkpassword()">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="用户名 :" name="username" id="username" required>
+            </div>
+
+{#            <div class="form-group">#}
+{#                <input type="email" class="form-control" placeholder="邮箱地址 :" name="email" id="email" required>#}
+{#            </div>#}
+            <div class="form-group">
+            <input type="tel"  class="form-control" name="phone" required="required" maxlength="11"  pattern="^1(3\d|4[5-9]|5[0-35-9]|6[567]|7[0-8]|8\d|9[0-35-9])\d{8}$" placeholder="电话号码 :" oninvalid="setCustomValidity('请输入正确的11位手机号码')" οninput="setCustomValidity('')">
+                </div>
+
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="密码 :" name="password" id="password"  required>
+            </div>
+            <div class="form-group">
+                <span id="tishi"></span></input>
+                <input type="password" class="form-control" placeholder="确认密码 :" name="repassword" id="repassword" required>
+            </div>
+
+            <input type="submit" class="btn btn-1" value="修改">
+{#            <button  class="btn " >创建</button>#}
+        </form>
+
+
+
+
+        <script type="text/javascript">
+    	function checkpassword() {
+    		var password = document.getElementById("password").value;
+    		var repassword = document.getElementById("repassword").value;
+
+            {#if(password != repassword) {#}
+            {#        document.getElementById("tishi").innerHTML="<br><font color='red'>两次输入密码不一致!</font>";#}
+            {#    return false;#}
+            {##}
+            {# }else {#}
+            {#     return true;#}
+            {# }#}
+
+
+            if(password == repassword) {
+                 return true;
+             }else {
+                 document.getElementById("tishi").innerHTML="<br><font color='red'>两次输入密码不一致!</font>";
+                 return false;
+             }
+
+
+    	}
+        </script>
+{% endblock %}

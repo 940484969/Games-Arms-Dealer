@@ -8,11 +8,11 @@ class User(AbstractUser):
     """
     用户信息表
     """
-    id = models.AutoField(primary_key=True, verbose_name='用户id')
+    # id = models.AutoField(primary_key=True, verbose_name='用户id')
     # userId = models.CharField(max_length=20, unique=True)
     # userPwd = models.CharField(max_length=20)
     # userEmail = models.CharField(max_length=32, unique=True)
-    # userPhone = models.CharField(max_length=20, unique=True)
+    phone = models.CharField(max_length=20, unique=True)
     # userAcitvate = models.BooleanField()
     # userPermission = models.BooleanField()
 

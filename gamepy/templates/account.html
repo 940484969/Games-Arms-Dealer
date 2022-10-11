@@ -67,7 +67,7 @@
 						<input type="submit" class="btn btn-1" value="登陆">
 
                         <a href="{% url 'register' %}"  class="btn btn-1"  id="login">注册</a>
-						<a href="#">忘记密码?</a>
+						<a href="{% url 'change' %}" >忘记密码?</a>
 					</form>
                     {% endblock %}
                 </div>
@@ -76,6 +76,12 @@
 		</div>
 	</div>
 	{% include 'foot.html' %}
-
+    {% if messages %}
+    <script>
+            {% for msg in messages %}
+                alert('{{ msg.message }}');
+            {% endfor %}
+        </script>
+    {% endif %}
 </body>
 </html>
