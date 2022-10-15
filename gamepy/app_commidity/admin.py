@@ -11,7 +11,7 @@ from app_commidity.models import *  # models模块中定义的图书表的信息
 
 class CommodityKindAdmin(admin.ModelAdmin):
     # 必须写成list_display  列表中的内容要与数据库字段名一致
-    list_display = ['com_id', 'com_name', 'com_logo', 'com_picture']
+    list_display = ['com_id', 'com_name', 'com_picture']
 
 
 class CommoditySpuAdmin(admin.ModelAdmin):

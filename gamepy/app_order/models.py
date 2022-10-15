@@ -21,4 +21,4 @@ class OrderCommodity(models.Model):
     sku_id = models.ForeignKey(to='app_commidity.CommoditySku', on_delete=models.CASCADE, verbose_name='sku_id')
     oc_number = models.IntegerField(verbose_name='商品数量')
     oc_price = models.FloatField(verbose_name='商品价格')
-    oc_comment = models.TextField(verbose_name='评论')
+    oc_comment = models.TextField(verbose_name='评论', null=True)

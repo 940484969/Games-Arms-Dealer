@@ -9,7 +9,7 @@ from django.db import models
 class CommodityKind(models.Model):
     com_id = models.AutoField(primary_key=True, verbose_name='商品种类id')
     com_name = models.CharField(max_length=20, unique=True, verbose_name='商品种类名称')
-    com_logo = models.CharField(max_length=20, unique=True, verbose_name='商品种类logo')
+    # com_logo = models.CharField(max_length=20, unique=True, verbose_name='商品种类logo')
     com_picture = models.ImageField(upload_to='image', verbose_name='商品种类图片')
 
 
@@ -37,7 +37,7 @@ class CommoditySku(models.Model):
 class CommdityPicture(models.Model):
     comm_id = models.AutoField(primary_key=True, verbose_name='图片id')
     comm_picture = models.ImageField(upload_to='image', verbose_name='图片')
-    comm_video = models.FileField(upload_to='image', verbose_name='视频')
+    comm_video = models.FileField(upload_to='viedo', null=True, verbose_name='视频')
     sku_id = models.ForeignKey(to='CommoditySku', on_delete=models.CASCADE, verbose_name='sku_id')
 
 

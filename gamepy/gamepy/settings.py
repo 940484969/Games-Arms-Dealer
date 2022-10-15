@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'app_user.my_middle.CustomAuthMiddleware',
 ]
 
 ROOT_URLCONF = 'gamepy.urls'
@@ -137,5 +138,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # 上传文件保存的路径
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'statics/media')
 MEDIA_URL = '/media/'
+
+
+# LOGIN_URL = '/app_user:login/'
+LOGIN_URL = '/login/'

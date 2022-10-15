@@ -24,13 +24,16 @@
 						<div class="dropdown-menu">
 							<div class="dropdown-inner">
 								<ul class="list-unstyled">
-									<li><a href="/category/">动作</a></li>
-									<li><a href="/category/">冒险</a></li>
-									<li><a href="/category/">射击</a></li>
-									<li><a href="/category/">剧情</a></li>
-									<li><a href="/category/">模拟</a></li>
-									<li><a href="/category/">体育竞速</a></li>
-									<li><a href="/category/">策略</a></li>
+									<li><a href="{% url 'app_commidity:action' %}">动作</a></li>
+									<li><a href="{% url 'app_commidity:venture' %}">冒险</a></li>
+									<li><a href="{% url 'app_commidity:single' %}">单人</a></li>
+									<li><a href="{% url 'app_commidity:multiplayer' %}">多人</a></li>
+									<li><a href="{% url 'app_commidity:drama' %}">剧情</a></li>
+									<li><a href="{% url 'app_commidity:sports' %}">体育</a></li>
+									<li><a href="{% url 'app_commidity:horror' %}">心理恐怖</a></li>
+
+
+
 								</ul>
 							</div>
 						</div>
