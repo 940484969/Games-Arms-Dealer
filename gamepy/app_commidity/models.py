@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-from django.contrib.auth.models import AbstractUser
+# from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -29,7 +29,8 @@ class CommoditySku(models.Model):
     sku_state = models.BooleanField(verbose_name='商品状态')
     com_id = models.ForeignKey(to='CommodityKind', on_delete=models.CASCADE, verbose_name='种类id')
     spu_id = models.ForeignKey(to='CommoditySpu', on_delete=models.CASCADE, verbose_name='spu_id')
-
+    sku_discount = models.FloatField(verbose_name='折扣')
+    # cart_id = models.ForeignKey(to='app_cart.CartItem', on_delete=models.CASCADE, verbose_name='spu_id',null=True)
 
 
 
@@ -62,3 +63,15 @@ class HomeDisplay(models.Model):
     home_dis_index = models.IntegerField(verbose_name='索引')
     sku_id = models.ForeignKey(to='CommoditySku', on_delete=models.CASCADE, verbose_name='sku_id')
     com_id = models.ForeignKey(to='CommodityKind', on_delete=models.CASCADE, verbose_name='商品种类id')
+
+
+class Review(models.Model):
+    review_id = models.AutoField(primary_key=True, verbose_name='评论id')
+    rev_content = models.TextField(verbose_name='评论')
+    user_id = models.ForeignKey(to='app_user.User', on_delete=models.CASCADE, verbose_name='用户id')
+    sku_id = models.ForeignKey(to='CommoditySku', on_delete=models.CASCADE, verbose_name='sku_id')
+
+
+
+
+

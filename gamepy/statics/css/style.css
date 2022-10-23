@@ -66,7 +66,7 @@ hr.line { margin: 15px auto; padding: 0; max-width: 90px;border: 0; border-top: 
 }
 
 header {padding: 50px 0; }
-header #logo{margin: 5px 0 15px;}
+/*header #logo{margin: 5px 0 15px;}*/
 header #cart {float: right;}
 header .form-search input{width: 70%;height: 56px;}
 header .form-search button {background: #222; color: #fff;padding: 12px 20px;font-size: 20px;}

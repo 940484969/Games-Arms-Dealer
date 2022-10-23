@@ -1,0 +1,39 @@
+
+{% extends 'orders_page.html' %}
+{% block  detail%}
+
+            {% for i in sku_kind_num %}
+			<div class="row">
+				<div class="product well">
+					<div class="col-md-3">
+						<div class="image">
+							<a href="{%  url 'app_commidity:product' %}?i={{ i.sku_id.sku_id }}">
+                                <img src="/static/media/{{ i.sku_id.commditypicture_set.all.0.comm_picture.name }}" />
+                            </a>
+						</div>
+					</div>
+					<div class="col-md-9">
+						<div class="caption">
+							<div class="name"><h3><a href="{%  url 'app_commidity:product' %}?i={{ i.sku_id.sku_id }}">{{ i.sku_id.sku_name }}</a></h3></div>
+
+{#                            订单编号#}
+                            {#							<div class="info">#}
+                            {#								<ul>#}
+                            {#									<li>Brand: text</li>#}
+                            {#									<li>ID: 0122222</li>#}
+                            {#								</ul>#}
+                            {#							</div>#}
+							<div class="price">现价： {{ i.oc_price }}</div>
+							<label>数量: {{ i.oc_number }}</label>
+
+							<hr>
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+            {% endfor %}
+{% endblock %}

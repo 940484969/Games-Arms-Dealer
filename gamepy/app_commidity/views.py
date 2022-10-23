@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect,HttpResponse
+from django.shortcuts import render, redirect, HttpResponse
 from app_commidity.models import *
 from django.urls import reverse
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -11,8 +11,21 @@ from django.views import View
 # Create your views here.
 
 class IndexShow(View):
+    """
+    主页显示
+    """
+
     def get(self, request):
-        return render(request, "index.html")
+        carousel = HomeCarousel.objects.all()
+        # print(carousel)
+        # print(carousel[0].sku_id.commditypicture_set.all()[0].comm_picture.name)
+        promotion = HomePromotion.objects.all()
+        # print(promotion)
+        # print(promotion.count())
+        # print(promotion[0].sku_id.commditypicture_set.all()[0].comm_picture.name)
+        sku = CommoditySku.objects.all()
+
+        return render(request, "index.html", locals())
 
 
 class ProductShow(View):
@@ -21,7 +34,16 @@ class ProductShow(View):
     """
 
     def get(self, request):
-        return render(request, "product.html")
+        # print()
+        id = request.GET.get('i')
+        obj = CommoditySku.objects.filter(sku_id=id).first()
+        # print(obj)
+
+
+        pic = obj.commditypicture_set.all()
+
+        # print(pic)
+        return render(request, "product.html", locals())
 
 
 class Category(View):
@@ -29,28 +51,31 @@ class Category(View):
     种类显示
     """
 
-    def get(self, request):
+    def get(self, request, *args):
         try:
-            cate = request.get_full_path().split('/')[2]
-            if cate == 'action':
+            # cate = request.get_full_path().split('/')[2]
+            cate = args[0]
+            # print(cate)
+            if cate == '1':
                 obj = CommodityKind.objects.filter(com_name='动作')
-            elif cate == 'venture':
+            elif cate == '2':
                 obj = CommodityKind.objects.filter(com_name='冒险')
-            elif cate == 'single':
+            elif cate == '4':
                 obj = CommodityKind.objects.filter(com_name='单人')
-            elif cate == 'multiplayer':
+            elif cate == '6':
                 obj = CommodityKind.objects.filter(com_name='多人')
-            elif cate == 'drama':
+            elif cate == '8':
                 obj = CommodityKind.objects.filter(com_name='剧情')
-            elif cate == 'sports':
+            elif cate == '9':
                 obj = CommodityKind.objects.filter(com_name='体育')
-            elif cate == 'horror':
+            elif cate == '10':
                 obj = CommodityKind.objects.filter(com_name='心理恐怖')
-            obj2 = CommodityKind.objects.first()
+            # obj2 = CommodityKind.objects.first()
             cate_name = obj[0].com_name
             cate_part = obj.first().commoditysku_set.all()
             # print(cate_part)
             # cate_part = obj.first().commoditysku_set.all()
+
             '''分页'''
             current_page = request.GET.get('page')
             paginator = Paginator(cate_part, 4)
@@ -79,10 +104,38 @@ class Category(View):
             # return HttpResponse('666')
             return render(request, "category.html", locals())
         except Exception:
-            print(111111111111)
+            # print(111111111111)
             return redirect(reverse('app_commidity:index'))
 
-    # Action
+
+class ReviewShow(View):
+
+    def get(self, request):
+        id = request.GET.get('i')
+        obj = CommoditySku.objects.filter(sku_id=id).first()
+        rev = Review.objects.filter(sku_id__sku_id=id)
+        # print(rev)
+        return render(request, 'review.html', locals())
+
+    def post(self, request):
+        id = request.GET.get('i')
+        obj = CommoditySku.objects.filter(sku_id=id).first()
+        rev = Review.objects.filter(sku_id__sku_id=id)
+        print(request.POST.get('i1'))
+        # print(rev)
+        return redirect('/review/')
+
+
+# class ReviewGet(View):
+#     def post(self, request):
+#         id = request.GET.get('i')
+#         obj = CommoditySku.objects.filter(sku_id=id).first()
+#         rev = Review.objects.filter(sku_id__sku_id=id)
+#         print(request.POST.get('i1'))
+#         # print(rev)
+#         return render(request, 'review.html', locals())
+
+# Action
 # Venture
 # Single
 # Multiplayer

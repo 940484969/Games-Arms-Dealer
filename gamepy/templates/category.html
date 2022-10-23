@@ -66,26 +66,60 @@
 
                             <div class="products">
                                 {% for i in posts.object_list %}
+
                                 <div class="col-lg-6 col-md-6 col-xs-12">
 									<div class="product">
+{#                                        #}
 {#										<div class="image"><a href="product.html"><img src="/static/images/iphone.png" /></a></div>#}
-										<div class="zoomImage"><a class="cover" href="product.html"><img src="/static/media/{{  i.commditypicture_set.all.0.comm_picture.name }}" /></a></div>
+										<div class="zoomImage"><a class="cover" id="home_pro_id_{{ forloop.counter }}" href="{%  url 'app_commidity:product' %}?i={{ i.sku_id }}"><img src="/static/media/{{  i.commditypicture_set.all.0.comm_picture.name }}" /></a></div>
                                         <div class="buttons">
-											<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+{#                                             {{ forloop.counter }}#}
+											<button class="btn cart" id="home_show_{{ forloop.counter }}" ><span class="glyphicon glyphicon-shopping-cart"></span></button>
 											<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
 											<a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
 										</div>
 										<div class="caption">
-											<div class="name"><h3><a href="product.html">{{ i.sku_name }}</a></h3></div>
+											<div class="name"><h3><a href="{%  url 'app_commidity:product' %}?i={{ i.sku_id }}">{{ i.sku_name }}</a></h3></div>
 											<div class="price">{{ "折扣" }}<span>{{i.sku_price}} </span></div>
 											<div class="rating">销量{{ i.sku_slaes }}     库存 {{ i.sku_stock }}</div>
 										</div>
 									</div>
 								</div>
+                                    <script>
+                         $('#home_show_{{ forloop.counter }}').click(
+                    function(){
+
+                        $.ajax({
+                                {#async: false,#}
+                                async: false,
+                                {#url: {%   url 'app_cart:add_cart' %} ,             //请求的url地址,#}
+                                url: {% url "app_cart:add_page" %} ,
+                                type:"get",        //请求的方式
+                                {#async:false,#}
+                                 data:{					//发送给后端的数据
+                                    {#obj : {{ i }};#}
+                                 sku_id : {{ i.sku_id }},		//获得name为i1的标签值
+
+                                {#i2: {{ }},		//获得name为i2的标签值#}
+                                 },
+                            success: function (data) {
+
+
+
+                                $("#header_cart").text(data.cart_num)
+                            },
+
+                            }
+                        )
+
+                    });
+
+    </script>
                                 {% endfor %}
 							</div>
 						</div>
 					</div>
+
 
 
 					<div class="row text-center">
@@ -114,10 +148,29 @@
                     </div>
 
 				</div>
-            {% include 'right.html' %}
+{#            {% include 'right.html' %}#}
 			</div>
 		</div>
 	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {% include 'foot.html' %}
+
 </body>
+
+
 </html>

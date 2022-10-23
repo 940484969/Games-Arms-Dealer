@@ -20,5 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     re_path('', include(('app_user.urls', 'app_user'), namespace='app_user')),
     re_path('', include(('app_commidity.urls', 'app_commidity'), namespace='app_commidity')),
+    re_path('', include(('app_order.urls', 'app_order'), namespace='app_order')),
+    re_path('', include(('app_cart.urls', 'app_cart'), namespace='app_cart')),
     # path('', include('app_order.urls')),
 ]

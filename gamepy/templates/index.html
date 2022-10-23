@@ -55,40 +55,25 @@
 				<div class="col-lg-12">
 					<!-- Carousel -->
 					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-						<!-- Indicators -->
-						<ol class="carousel-indicators hidden-xs">
-							<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-							<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-							<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-						</ol>
-						<!-- Wrapper for slides -->
+                        {# 轮播图 #}
 						<div class="carousel-inner">
+                            {% for c in carousel %}
+                                {% if forloop.counter == 1 %}
 							<div class="item active">
-								<img src="/static/images/main-banner1-1903x600.jpg" alt="First slide">
+                                {% else %}
+                            <div class="item">
+                                {% endif %}
+								<a href="{%  url 'app_commidity:product' %}?i={{ c.sku_id.sku_id }}" ><img src="/static/media/{{ c.sku_id.commditypicture_set.all.0.comm_picture.name }}" alt="First slide"></a>
 								<!-- Static Header -->
 								<div class="header-text hidden-xs">
 									<div class="col-md-12 text-center">
 									</div>
 								</div><!-- /header-text -->
 							</div>
-							<div class="item">
-								<img src="/static/images/main-banner2-1903x600.jpg" alt="Second slide">
-								<!-- Static Header -->
-								<div class="header-text hidden-xs">
-									<div class="col-md-12 text-center">
-									</div>
-								</div><!-- /header-text -->
-							</div>
-							<div class="item">
-								<img src="/static/images/main-banner3-1903x600.jpg" alt="Third slide">
-								<!-- Static Header -->
-								<div class="header-text hidden-xs">
-									<div class="col-md-12 text-center">
-									</div>
-								</div><!-- /header-text -->
-							</div>
+                            {% endfor %}
 						</div>
 						<!-- Controls -->
+                        {# 轮播图的箭头 #}
 						<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
 							<span class="glyphicon glyphicon-chevron-left"></span>
 						</a>
@@ -101,144 +86,97 @@
 
 
 
+            {# 今日特惠 显示内容#}
+
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="heading"><h2>今日特惠</h2></div>
 					<div class="products">
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        {%  for p in promotion  %}
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 							<div class="product">
-								<div class="image"><a href="/product/"><img src="/static/images/iphone.png" /></a></div>
-								<div class="buttons">
-									<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+								<div class="image"><a id="home_pro_id_{{ forloop.counter }}" href="{%  url 'app_commidity:product' %}?i={{ p.sku_id.sku_id }}"><img height="400" src="/static/media/{{ p.sku_id.commditypicture_set.all.0.comm_picture.name }}"></a></div>
+                                <div class="buttons">
+                                    {# href="{% url 'app_cart:cart'%}" #}
+									<button class="btn cart" id="home_pro_{{ forloop.counter }}"><span class="glyphicon glyphicon-shopping-cart"></span></button>
 									<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
 									<a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
 								</div>
 								<div class="caption">
-									<div class="name"><h3><a href="/product/">Aliquam erat volutpat</a></h3></div>
-									<div class="price">$122<span>$98</span></div>
+                                    {#      乘法      #}
+									<div class="name"><h3><a href="{%  url 'app_commidity:product' %}?i={{ p.sku_id.sku_id }}">{{ p.sku_id.sku_name }}</a></h3></div>
+
+									<div class="price">{%  widthratio  p.sku_id.sku_discount 1 p.sku_id.sku_price  %}<span>{{ p.sku_id.sku_price }}</span></div>
 									<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div>
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-							<div class="product">
-								<div class="image"><a href="/product/"><img src="/static/images/galaxy-s4.jpg" /></a></div>
-								<div class="buttons">
-									<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-									<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
-									<a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
-								</div>
-								<div class="caption">
-									<div class="name"><h3><a href="/product/">Aliquam erat volutpat</a></h3></div>
-									<div class="price">$122<span>$98</span></div>
-									<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty"></span></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-							<div class="product">
-								<div class="image"><a href="/product/"><img src="/static/images/galaxy-note.jpg" /></a></div>
-								<div class="buttons">
-									<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-									<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
-									<a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
-								</div>
-								<div class="caption">
-									<div class="name"><h3><a href="/product/">Aliquam erat volutpat</a></h3></div>
-									<div class="price">$122<span>$98</span></div>
-									<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty"></span></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-							<div class="product">
-								<div class="image"><a href="/product/"><img src="/static/images/Z1.png" /></a></div>
-								<div class="buttons">
-									<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-									<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
-									<a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
-								</div>
-								<div class="caption">
-									<div class="name"><h3><a href="/product/">Aliquam erat volutpat</a></h3></div>
-									<div class="price">$122<span>$98</span></div>
-									<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></div>
-								</div>
-							</div>
-						</div>
+                        <script>
+                         $('#home_pro_{{ forloop.counter }}').click(
+                    function(){
+
+                        $.ajax({
+                                {#async: false,#}
+                                async: false,
+                                {#url: {%   url 'app_cart:add_cart' %} ,             //请求的url地址,#}
+                                url: {% url "app_cart:add_page" %} ,
+                                type:"get",        //请求的方式
+                                {#async:false,#}
+                                 data:{					//发送给后端的数据
+                                    {#obj : {{ i }};#}
+                                 sku_id : {{ p.sku_id.sku_id }},		//获得name为i1的标签值
+
+                                {#i2: {{ }},		//获得name为i2的标签值#}
+                                 },
+                            success: function (data) {
+
+                                $("#header_cart").text(data.cart_num)
+                            },
+
+                            }
+                        )
+
+                    });
+
+    </script>
+
+                        {% endfor %}
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="banner">
-					<div class="col-sm-6">
-						<img src="/static/images/sub-banner4.jpg" />
-					</div>
-					<div class="col-sm-6">
-						<img src="/static/images/sub-banner5.png" />
-					</div>
-				</div>
-			</div>
+
+
+{#            最新上架              #}
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="heading"><h2>最新上架</h2></div>
 					<div class="products">
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 							<div class="product">
-								<div class="image"><a href="/product/"><img src="/static/images/iphone.png" /></a></div>
-								<div class="buttons">
-									<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-									<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
-									<a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
-								</div>
+{#								<div class="image"><a href="/product/"><img src="/static/images/iphone.png" /></a></div>#}
+{#                                sku[15].commditypicture_set.all()[0].comm_picture.name#}
+                                <div class="image"><a href="{%  url 'app_commidity:product' %}?i={{ sku.9.sku_id }}"><img src="/static/media/{{ sku.9.commditypicture_set.all.0.comm_picture.name }}"/></a></div>
+
+
 								<div class="caption">
-									<div class="name"><h3><a href="/product/">Aliquam erat volutpat</a></h3></div>
-									<div class="price">$122<span>$98</span></div>
+									<div class="name"><h3><a href="/product/">{{ sku.9.sku_name }}</a></h3></div>
+									<div class="price">{%  widthratio  sku.9.sku_discount 1 sku.9.sku_price  %}<span>{{ sku.9.sku_price }}</span></div>
 									<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div>
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 							<div class="product">
-								<div class="image"><a href="/product/"><img src="/static/images/galaxy-s4.jpg" /></a></div>
-								<div class="buttons">
-									<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-									<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
-									<a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
-								</div>
+{#								<div class="image"><a href="/product/"><img src="/static/images/iphone.png" /></a></div>#}
+{#                                sku[15].commditypicture_set.all()[0].comm_picture.name#}
+                                <div class="image"><a href="{%  url 'app_commidity:product' %}?i={{ sku.14.sku_id }}"><img src="/static/media/{{ sku.14.commditypicture_set.all.0.comm_picture.name }}"/></a></div>
+
+
 								<div class="caption">
-									<div class="name"><h3><a href="/product/">Aliquam erat volutpat</a></h3></div>
-									<div class="price">$122<span>$98</span></div>
-									<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty"></span></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-							<div class="product">
-								<div class="image"><a href="/product/"><img src="/static/images/galaxy-note.jpg" /></a></div>
-								<div class="buttons">
-									<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-									<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
-									<a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
-								</div>
-								<div class="caption">
-									<div class="name"><h3><a href="/product/">Aliquam erat volutpat</a></h3></div>
-									<div class="price">$122<span>$98</span></div>
-									<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty"></span></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-							<div class="product">
-								<div class="image"><a href="/product/"><img src="/static/images/Z1.png" /></a></div>
-								<div class="buttons">
-									<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-									<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>
-									<a class="btn compare" href="#"><span class="glyphicon glyphicon-transfer"></span></a>
-								</div>
-								<div class="caption">
-									<div class="name"><h3><a href="/product/">Aliquam erat volutpat</a></h3></div>
-									<div class="price">$122<span>$98</span></div>
-									<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></div>
+									<div class="name"><h3><a href="/product/">{{ sku.14.sku_name }}</a></h3></div>
+									<div class="price">{%  widthratio  sku.14.sku_discount 1 sku.14.sku_price  %}<span>{{ sku.14.sku_price }}</span></div>
+									<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div>
 								</div>
 							</div>
 						</div>
@@ -247,6 +185,7 @@
 			</div>
 		</div>
 	</div>
+    </div>
 	{% include 'foot.html' %}
 </body>
 </html>

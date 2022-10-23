@@ -1,0 +1,40 @@
+{% extends 'product.html' %}
+{% block review %}
+
+{% for i in rev %}
+    <div class="tab-content">
+    {{ i.user_id.username }} : {{ i.rev_content }}
+    </div>
+{% endfor %}
+
+
+{#<form method="post" action="{%  url 'app_commidity:review' %}?i={{ i.sku_id }}" target="_blank">#}
+{#    <div class="form-group">#}
+{#        <textarea  type="text" name="rev"></textarea>#}
+{#    </div>#}
+{#    <button type="submit" class="btn btn-success"></button>#}
+
+{#    <input type="submit" class="btn btn-success"  id="send" name="发表评论">发表评论</input>#}
+{#</form>#}
+<script>
+    {#alert(123);#}
+    $("#send").click(function (){
+    $.ajax({
+         url: {%  url 'app_commidity:review' %}?i={{ i.sku_id }},             //请求的url地址,
+                type:"post",        //请求的方式
+                data:{					//发送给后端的数据
+                    i1:$("[name = 'rev']").val(),
+                },
+        sueccess:function(res){				//res是后端发给前端的内容  均是字符串的形式
+                  {#$("[name = 'i3']").val(res);		//给 name为i3的标签赋值 #}
+              }
+        })
+    });
+    {#alert(1234);#}
+</script>
+
+{% endblock %}
+
+
+
+

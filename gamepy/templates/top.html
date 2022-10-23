@@ -1,9 +1,15 @@
 <nav id="top">
+
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-6">
 					<ul class="top-link">
-						<li><a href="//"><span class="glyphicon glyphicon-user"></span>我的账户</a></li>
+
+                        {% if not user %}
+						    <li><a href="{% url "app_user:my_index" %}"><span class="glyphicon glyphicon-user"></span>我的账户</a></li>
+                        {% elif user %}
+                            <li><a href="{% url "app_user:my_index" %}"><span class="glyphicon glyphicon-user"></span>{{ user }}</a></li>
+                        {% endif %}
 						<li><a href="/contact/"><span class="glyphicon glyphicon-envelope"></span>消息</a></li>
 					</ul>
 				</div>

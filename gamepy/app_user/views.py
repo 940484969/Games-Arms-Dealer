@@ -3,6 +3,10 @@ import re
 from django.shortcuts import render, redirect, HttpResponse
 from django.urls import reverse
 from django.views import View
+from django.contrib.auth import logout
+
+from app_cart.models import CartItem
+from app_commidity.models import CommodityKind
 # from django.contrib.auth.models import User
 from app_user.models import User
 from django.contrib.auth import authenticate, login
@@ -12,26 +16,31 @@ from django.contrib.auth import authenticate, login
 
 class Login(View):
     def get(self, request):
+
         return render(request, "account.html")
 
     def post(self, request):
         username = request.POST['username']
         pwd = request.POST['password']
         user = authenticate(request, username=username, password=pwd)
+        # print(user)
+        # print(type(user))
         if user is not None:
             login(request, user)
         else:
             messages.success(request, "密码错误")
-            return render(request, "account.html")
-        return redirect(reverse('app_commidity:index'))
+            return render(request, "account.html", )
+        return redirect(reverse('app_commidity:index'), locals())
 
 
 class XieyiShow(View):
     def get(self, request):
+
         return render(request, "xieyi.html")
 
 class Register(View):
     def get(self, request):
+        # cate_kind = CommodityKind.objects.all()
         return render(request, "registered.html")
 
     def post(self, request):
@@ -67,6 +76,7 @@ from django.contrib import messages
 class ChangePasswd(View):
 
     def get(self, request):
+
         return render(request, "change_passwd.html")
 
     def post(self, request):
@@ -97,8 +107,35 @@ class ChangePasswd(View):
             # return redirect(reverse('account'))
             return render(request, "change_passwd.html")
 
-class  logout(View):
-    def post(self):
-        logout(self)
+class  Logout(View):
+    def get(self, request):
+        logout(request)
         return redirect(reverse('app_user:login'))
 
+
+
+
+
+
+
+# 设置全局参数
+def global_params(request):
+    cate_kind = CommodityKind.objects.all()
+    if request.user.is_authenticated:
+        try:
+            all_num = CartItem.objects.filter(user_id=request.user, cart_is_del=0).first().sku_id.all()
+
+            cart_num = 0
+            for i in all_num:
+                cart_num += i.num
+        except Exception:
+            cart_num = 0
+    return locals()
+
+
+
+
+class MyIndexPasswd(View):
+    def get(self, request):
+        user = request.user
+        return render(request, 'my_index.html', locals())

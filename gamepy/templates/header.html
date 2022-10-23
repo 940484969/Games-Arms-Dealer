@@ -3,7 +3,8 @@
 <header class="container">
 		<div class="row">
 			<div class="col-md-4">
-				<div id="logo"><img src="/static/images/logo.png" /></div>
+{#				<div id="logo"><img src="/static/images/logo.png" /></div>#}
+                <div id="logo"><img width="70%"  height="70%" src="/static/images/logo.png" /></div>
 			</div>
 			<div class="col-md-4">
 				<form class="form-search">
@@ -12,7 +13,7 @@
 				</form>
 			</div>
 			<div class="col-md-4">
-				<div id="cart"><a class="btn btn-1" href="/cart/"><span class="glyphicon glyphicon-shopping-cart"></span>CART : 0 ITEM</a></div>
+                <div id="cart"><a class="btn btn-1"  href="{% url 'app_cart:cart_page' %}"><span class="glyphicon glyphicon-shopping-cart" id="header_cart">{{ cart_num }}</span></a></div>
 			</div>
 		</div>
 </header>

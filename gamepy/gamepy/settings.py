@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'app_user',
     'app_order',
     'app_commidity',
+    'app_cart',
 ]
 
 MIDDLEWARE = [
@@ -65,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'app_user.views.global_params',
             ],
         },
     },
@@ -84,7 +86,7 @@ DATABASES = {
         'PORT': 3306,  # 数据库端口
         'USER': 'root',  # 数据库用户名
         'PASSWORD': 'cjx.2001',  # 数据库用户密码
-        'NAME': 'gamespy'  # 数据库名字
+        'NAME': 'GAD'  # 数据库名字
     }
 }
 
