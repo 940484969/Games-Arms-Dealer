@@ -68,7 +68,7 @@
 							<label>数量: {{ i.order_all_number }}</label><br>
 
                            {% if i.order_pay_state %}
-                            <a href="" class="btn btn-success">查看详情</a>
+                            <a href="{% url "app_order:order_info" i.order_id%}" class="btn btn-success">查看详情</a>
                             {% else %}
                             <a href="{% url "app_order:order_info" i.order_id%}" class="btn btn-danger">请支付</a>
                             {% endif %}

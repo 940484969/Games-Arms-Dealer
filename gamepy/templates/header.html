@@ -7,13 +7,93 @@
                 <div id="logo"><img width="70%"  height="70%" src="/static/images/logo.png" /></div>
 			</div>
 			<div class="col-md-4">
-				<form class="form-search">
-					<input type="text" class="input-medium search-query">
-					<button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
-				</form>
+
+{#					搜索框框#}
+                    <input id="search_text" type="text" class="input-medium search-query">
+
+
+                    <button id="search_btn" class="btn"><span>查找</span></button>
+                        <p id="ddddd" ></p>
 			</div>
 			<div class="col-md-4">
                 <div id="cart"><a class="btn btn-1"  href="{% url 'app_cart:cart_page' %}"><span class="glyphicon glyphicon-shopping-cart" id="header_cart">{{ cart_num }}</span></a></div>
 			</div>
 		</div>
+
 </header>
+<script>
+                         $('#search_btn').click(
+                    function(){
+                        var params = JSON.stringify({					//发送给后端的数据
+
+                                    sku_name: $("#search_text").val(),
+
+                                });
+
+
+
+
+
+                        {#var oA = document.createElement("a"); //创建a标签#}
+                                        {#oA.href = "product/?id="+item.sku_id; //添加 href 属性#}
+                        {#                oA.href = "#";#}
+                        {#                var text = document.createTextNode('this is my href');#}
+                        {#                oA.appendChild(text);#}
+
+                           //动态的将节点插入目标元素之后
+                            function insertAfter(newElement, targetElement) {
+                                var parent = targetElement.parentNode;//得到父节点
+                                if (parent.lastChild == targetElement) {
+                                    // 如果最后的节点是目标元素，则直接添加。因为默认是最后
+                                    parent.appendChild(newElement);
+                                } else {
+                                    parent.insertBefore(newElement, targetElement.nextSibling);
+                                    //如果不是，则插入在目标元素的下一个兄弟节点 的前面。也就是目标元素的后面
+                                }
+                            }
+
+
+
+                    $.ajax({
+                         url: "/search/",             //请求的url地址,
+                                type:"post",        //请求的方式
+                                dataType: "json",
+                                data:params,
+                            success: function (data) {
+
+                                if(data.is_exist){
+                                    var dataObj = data.sku_ids;
+
+
+
+                                    $.each(dataObj, function(index, item){
+                                        var obj = document.getElementById("ddddd");
+
+                                var oA = document.createElement("a");
+                                {#alert(item.sku_id);#}
+                                oA.setAttribute("href", "/product/?i="+item.sku_id);
+                                oA.append(item.sku_name);
+                                {#oA.appendChild('<br>');#}
+                                insertAfter(oA, obj);
+
+
+
+                               });
+
+                                }
+                                else {
+                                    alert("查无此物");
+                                }
+                                {#alert(123);#}
+                                {#$("#header_cart").text(data.cart_num)#}
+                            },
+
+
+                            }
+                        )
+                        $("#search_text").val("");
+                        {#location.reload();#}
+
+                    });
+
+    </script>

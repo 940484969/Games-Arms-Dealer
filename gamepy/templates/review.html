@@ -5,9 +5,15 @@
     <div class="tab-content">
     {{ i.user_id.username }} : {{ i.rev_content }}
     </div>
+
 {% endfor %}
+    {% if is_buy %}
+        <textarea id="ret"></textarea>
+<button id="send"  class="btn btn-success">发表评论</button>
+{% else %}
 
-
+    <button class="btn btn-danger">购买后才能评论</button>
+{% endif %}
 {#<form method="post" action="{%  url 'app_commidity:review' %}?i={{ i.sku_id }}" target="_blank">#}
 {#    <div class="form-group">#}
 {#        <textarea  type="text" name="rev"></textarea>#}
@@ -19,17 +25,26 @@
 <script>
     {#alert(123);#}
     $("#send").click(function (){
+        var params = JSON.stringify({					//发送给后端的数据
+                    sk_id: {{id}},
+                    content: $('#ret').val(),
+
+                });
     $.ajax({
-         url: {%  url 'app_commidity:review' %}?i={{ i.sku_id }},             //请求的url地址,
+         url: "/review/",             //请求的url地址,
                 type:"post",        //请求的方式
-                data:{					//发送给后端的数据
-                    i1:$("[name = 'rev']").val(),
-                },
+                dataType: "json",
+
+                data:params,
         sueccess:function(res){				//res是后端发给前端的内容  均是字符串的形式
                   {#$("[name = 'i3']").val(res);		//给 name为i3的标签赋值 #}
-              }
+
+         }
         })
+        $("#ret").val("");
+        location.reload();
     });
+
     {#alert(1234);#}
 </script>
 

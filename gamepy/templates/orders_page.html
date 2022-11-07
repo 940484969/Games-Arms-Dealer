@@ -96,10 +96,20 @@
                                     <td id="d_p">{{ information.order_all_money }}元</td>
                                 </tr>
                             </table>
-    {#                没有实现ajax 与是否购买的认证        #}
-                            <center><input  onclick="show_confirm()" class="btn btn-1" value="购买"></center>
+                            {% block  lk %}
 
-    {#					#}<a href="{% url "app_order:order_del" information.order_id %}">取消订单</a>
+{#                            <center><input onclick="show_confirm()" class="btn btn-1" value="购买"></center>#}
+{##}
+{#                            <a href="{% url "app_order:order_del" information.order_id %}">取消订单</a>#}
+                                <form method="post" action="/order_buy/{{ information.order_id}}">
+        <input type="hidden" name="ord_id" value={{ information.order_id }}>
+
+<center><input type="submit" class="btn btn-1" value="购买"></center>
+
+{#    <center><a href="{% url "app_order:buy" %}" class="btn btn-1" >购买</a></center>#}
+</form>
+        <a href="{% url "app_order:order_del" information.order_id %}">取消订单</a>
+                            {% endblock %}
                         </div>
                     </div>
                 </div>

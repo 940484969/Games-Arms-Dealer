@@ -143,6 +143,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'statics/media')
 MEDIA_URL = '/media/'
 
-
 # LOGIN_URL = '/app_user:login/'
 LOGIN_URL = '/login/'
+
+# # 阿里的接口
+# ALIPAY_PUBLIC = open(os.path.join(BASE_DIR, 'keys', 'alipay_public.txt')).read()
+# APP_PUBLIC = open(os.path.join(BASE_DIR, 'keys', 'app_public.txt')).read()
+# APP_PRIVATE = open(os.path.join(BASE_DIR, 'keys', 'app_private.txt')).read()
+ALIPAY_PUBLIC = os.path.join(BASE_DIR, 'keys', 'alipay_public.txt')
+APP_PUBLIC = os.path.join(BASE_DIR, 'keys', 'app_public.txt')
+APP_PRIVATE = os.path.join(BASE_DIR, 'keys', 'app_private.txt')

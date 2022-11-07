@@ -37,3 +37,19 @@
 
             {% endfor %}
 {% endblock %}
+
+
+
+{% block  lk %}
+    {% if not information.order_pay_state %}
+    <form method="post" action="/order_buy/{{ sku_kind_num.first.order_id_id}}">
+        <input type="hidden" name="ord_id" value={{ information.order_id }}>
+
+<center><input type="submit" class="btn btn-1" value="购买"></center>
+
+{#    <center><a href="{% url "app_order:buy" %}" class="btn btn-1" >购买</a></center>#}
+</form>
+        <a href="{% url "app_order:order_del" information.order_id %}">取消订单</a>
+
+    {% endif %}
+{% endblock %}

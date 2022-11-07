@@ -94,7 +94,7 @@
                             <button  id="sub_{{ forloop.counter }}" class="btn btn-2 ">减少</button>
 							<hr>
 
-							<button  class="btn btn-default pull-right">删除</button>
+							<button  class="btn btn-default pull-right" id="del_{{ forloop.counter }}">删除</button>
 {#                            #}
 						</div>
 					</div>
@@ -163,7 +163,31 @@
 
                     })
 
+
                     })
+                         $('#del_{{ forloop.counter }}').click(
+                    function(){
+
+                        $.ajax({
+                        url: {%   url 'app_cart:del_page' %} ,             //请求的url地址,
+                        type:"post",        //请求的方式
+                        {#async:false,        // 同步#}
+                         data:{					//发送给后端的数据
+                            {#obj : {{ i }};#}
+                         obj_id : {{ i.num_id }},		//获得name为i1的标签值
+
+                        {#i2: {{ }},		//获得name为i2的标签值#}
+                    },
+                            {#接受后端数据的函数#}
+                            success: function (data) {
+                            alert("您已删除商品");
+                            window.location.href = {% url "app_cart:cart_page" %};
+                            },
+                    })
+                    })
+
+
+
                          $('#sub_'+{{ forloop.counter }}).click(
                     function(){
                         $.ajax({
